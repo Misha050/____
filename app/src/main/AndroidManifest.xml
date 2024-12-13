@@ -29,6 +29,12 @@
             android:exported="true">
         </activity>
 
+        <!-- HistoryPage -->
+        <activity
+            android:name=".HistoryPage"
+            android:exported="true">
+        </activity>
+
     </application>
 
 </manifest>

@@ -1,6 +1,7 @@
 package com.example.imt;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.ProgressBar;
@@ -14,25 +15,40 @@ public class NextPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.next_page);
 
-        // Retrieve BMI value from intent
+        // Получение значения ИМТ из намерения
         Intent intent = getIntent();
         double bmi = intent.getDoubleExtra("BMI_VALUE", 0.0);
 
-        // Initialize UI components
+        // Инициализация UI-компонентов
         TextView numberTextView = findViewById(R.id.number);
         ProgressBar progressBar = findViewById(R.id.progressBar);
         Button backButton = findViewById(R.id.button2);
 
-        // Display BMI value
+        // Отображение значения ИМТ
         numberTextView.setText(String.format("%.2f", bmi));
 
-        // Set progress and color zones
-        int progress = (int) Math.min(100, Math.max(0, bmi * 5)); // Normalize BMI to 0-100
+        // Нормализация ИМТ в диапазоне 0-100 для прогресса
+        int progress = (int) Math.min(100, Math.max(0, bmi * 5));
         progressBar.setProgress(progress);
 
-        // Back button action
+        // Установка цвета в зависимости от значения ИМТ
+        if (bmi < 18.5) {
+            // Синий цвет для недостаточного веса
+            progressBar.getProgressDrawable().setColorFilter(0xFF0000FF, PorterDuff.Mode.SRC_IN);
+        } else if (bmi < 25) {
+            // Зеленый цвет для нормального веса
+            progressBar.getProgressDrawable().setColorFilter(0xFF00FF00, PorterDuff.Mode.SRC_IN);
+        } else if (bmi < 30) {
+            // Желтый цвет для избыточного веса
+            progressBar.getProgressDrawable().setColorFilter(0xFFFFFF00, PorterDuff.Mode.SRC_IN);
+        } else {
+            // Оранжевый цвет для ожирения
+            progressBar.getProgressDrawable().setColorFilter(0xFFFFA500, PorterDuff.Mode.SRC_IN);
+        }
+
+        // Действие кнопки назад
         backButton.setOnClickListener(v -> {
-            finish(); // Return to MainActivity
+            finish(); // Возвращение в MainActivity
         });
     }
 }

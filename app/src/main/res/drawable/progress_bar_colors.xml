@@ -1,17 +1,21 @@
 <layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- Фон прогресс-бара -->
     <item android:id="@android:id/background">
         <shape>
             <solid android:color="#CCCCCC" />
         </shape>
     </item>
+
+    <!-- Прогресс -->
     <item android:id="@android:id/progress">
         <clip>
             <shape>
                 <gradient
                     android:angle="0"
-                    android:startColor="#0000FF" <!-- Синий -->
-                    android:centerColor="#00FF00" <!-- Зеленый -->
-                    android:endColor="#FFA500"   <!-- Оранжевый -->
+                    android:startColor="#0000FF"
+                    android:centerColor="#00FF00"
+                    android:centerX="0.5"
+                    android:endColor="#FFA500"
                     android:type="linear" />
             </shape>
         </clip>
